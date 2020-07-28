@@ -1,7 +1,7 @@
 using System.Text;
 using justauth.src.Infrastructure.DataBase;
 using justauth.src.Models;
-using justauth.src.Services;
+using justauth.src.Services.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
