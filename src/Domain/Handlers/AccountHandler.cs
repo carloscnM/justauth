@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using justauth.src.Domain.Commands.Requests;
 using justauth.src.Domain.Commands.Responses;
 using justauth.src.Models;
-using justauth.src.Services;
+using justauth.src.Services.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

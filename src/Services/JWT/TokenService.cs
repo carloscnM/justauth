@@ -6,7 +6,7 @@ using justauth.src.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace justauth.src.Services 
+namespace justauth.src.Services.JWT 
 {
     public class TokenService : ITokenService
     {

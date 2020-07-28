@@ -1,6 +1,6 @@
 using justauth.src.Models;
 
-namespace justauth.src.Services
+namespace justauth.src.Services.JWT
 {
     public interface ITokenService
     {
