@@ -1,10 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using justauth.src.Domain.Commands.Requests;
-using justauth.src.Models;
-using justauth.src.Services;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace justauth.src.Controllers 
@@ -26,7 +23,7 @@ namespace justauth.src.Controllers
                 return StatusCode(400, ModelState);
             }
            var response =  await _mediator.Send(command);
-           return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, response.Errors) ; 
+           return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response	.Status}) ; 
         }
 
         [HttpPost("logon")]
@@ -36,7 +33,7 @@ namespace justauth.src.Controllers
                 return StatusCode(400, ModelState);
             }
             var response =  await _mediator.Send(command);
-            return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, response.Errors) ;  
+            return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response	.Status}) ;  
         }
     }
 }

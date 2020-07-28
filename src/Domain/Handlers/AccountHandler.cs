@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using justauth.src.Domain.Commands.Requests;
@@ -11,18 +9,43 @@ using Microsoft.AspNetCore.Identity;
 
 namespace justauth.src.Domain.Handlers 
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserRequest, UserResponse>
+    public class LogonHandler : IRequestHandler<LogonRequest, UserResponse>,
+        IRequestHandler<RegisterUserRequest, UserResponse>
     {
-        private readonly UserManager<User> _userManager;
-        private readonly ITokenService _tokenService;
 
-        public RegisterUserHandler(UserManager<User> userManager,
-            ITokenService tokenService)
+        #region propriety
+        private readonly SignInManager<User> _signInManager;
+        private readonly ITokenService _tokenService;
+        private readonly UserManager<User> _userManager;
+
+        #endregion
+
+        #region constructs
+        public LogonHandler(SignInManager<User> signInManager,
+            ITokenService tokenService,
+            UserManager<User> userManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _tokenService = tokenService;
         }
 
+        #endregion
+
+        #region logonUserhandler
+        public async Task<UserResponse> Handle(LogonRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, isPersistent:false, lockoutOnFailure:false);
+            if (result.Succeeded){
+                var token = _tokenService.GenerateToken(request.Email);
+                return new UserResponse(token.Email, token.Token, token.Expiration);
+            }
+            return new UserResponse(400, "Email or passWord Invalid");
+        }
+
+        #endregion
+        
+        #region registerUserHandler
         public async Task<UserResponse> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
             if(await _userManager.FindByEmailAsync(request.Email) != null){
@@ -37,5 +60,7 @@ namespace justauth.src.Domain.Handlers
             }
             return new UserResponse(400, "One or more errors occurred during registration");
         }
+
+        #endregion
     }
 }

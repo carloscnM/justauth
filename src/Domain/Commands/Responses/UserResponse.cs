@@ -34,11 +34,5 @@ namespace justauth.src.Domain.Commands.Responses
         public string Token { get; private set; }
         public string Type { get; private set;} = "bearer";
         public DateTime Expiration { get; private set; }
-
-
-        public void AddError(string description)
-        {
-            Errors.Add(description);
-        }
     }
 }
