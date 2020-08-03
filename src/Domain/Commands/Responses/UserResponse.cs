@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using justauth.src.Models;
+using justauth.src.Domain.Shared.Responses;
 
 namespace justauth.src.Domain.Commands.Responses
 {
@@ -13,15 +13,13 @@ namespace justauth.src.Domain.Commands.Responses
             Expiration = expiration;
         }
 
-        public UserResponse(int statusCode, string descriptionError)
+        public UserResponse(string descriptionError)
         {
-            base.StatusCode = statusCode;
             Errors.Add(descriptionError);
         }
 
-        public UserResponse(int statusCode, List<string> Errors)
+        public UserResponse(List<string> Errors)
         {
-            base.StatusCode = statusCode;
             Errors.AddRange(Errors);
         }
 

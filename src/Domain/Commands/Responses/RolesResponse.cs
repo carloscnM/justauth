@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-
+using justauth.src.Domain.Shared.Responses;
 
 namespace justauth.src.Domain.Commands.Responses
 {
     public class RolesResponse : BaseResponse
     {
         
-        public RolesResponse(int statusCode, string descriptionError)
+        public RolesResponse(string descriptionError)
         {
-            base.StatusCode = statusCode;
             Errors.Add(descriptionError);
         }
         public RolesResponse()

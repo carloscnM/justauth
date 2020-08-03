@@ -7,7 +7,7 @@ using justauth.src.Services.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace justauth.src.Domain.Handlers 
+namespace justauth.src.Domain.Handlers.Users 
 {
     public class LogonHandler : IRequestHandler<LogonRequest, UserResponse>,
         IRequestHandler<RegisterUserRequest, UserResponse>
@@ -40,7 +40,7 @@ namespace justauth.src.Domain.Handlers
                 var token = _tokenService.GenerateToken(request.Email);
                 return new UserResponse(token.Email, token.Token, token.Expiration);
             }
-            return new UserResponse(400, "Email or passWord Invalid");
+            return new UserResponse("Email or passWord Invalid");
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace justauth.src.Domain.Handlers
         public async Task<UserResponse> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
             if(await _userManager.FindByEmailAsync(request.Email) != null){
-                 return new UserResponse(400, "User already registered");
+                 return new UserResponse("User already registered");
             }
 
             User user = new User(request.FirstName, request.LastName, request.Email);
@@ -58,7 +58,7 @@ namespace justauth.src.Domain.Handlers
                 var token = _tokenService.GenerateToken(user.Email);
                 return new UserResponse(token.Email, token.Token, token.Expiration);
             }
-            return new UserResponse(400, "One or more errors occurred during registration");
+            return new UserResponse("One or more errors occurred during registration");
         }
 
         #endregion

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using justauth.src.Models;
 
-namespace justauth.src.Domain.Commands.Responses
+
+namespace justauth.src.Domain.Shared.Responses
 {
     public class BaseResponse 
     {
@@ -10,8 +10,8 @@ namespace justauth.src.Domain.Commands.Responses
         {
             Errors = new List<string>();
         }
-        public int StatusCode { get; protected set; }
-        public string Status { get {return Errors.Any() ? "Error" : "Sucesso";}}
+
+        public bool Success { get {return Errors.Any() ? false : true;}}
         public List<string> Errors { get; protected set; }
 
         public void AddError(string description)

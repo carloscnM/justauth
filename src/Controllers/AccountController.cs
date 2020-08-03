@@ -19,11 +19,11 @@ namespace justauth.src.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserRequest command)
         {
-            if(!ModelState.IsValid){
-                return StatusCode(400, ModelState);
-            }
+           if(!ModelState.IsValid){
+               return StatusCode(400, ModelState);
+           }
            var response =  await _mediator.Send(command);
-           return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response	.Status}) ; 
+           return response.Success ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response.Success}) ; 
         }
 
         [HttpPost("logon")]
@@ -33,7 +33,7 @@ namespace justauth.src.Controllers
                 return StatusCode(400, ModelState);
             }
             var response =  await _mediator.Send(command);
-            return response.StatusCode == 0 ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response	.Status}) ;  
+            return response.Success ? (IActionResult) Ok(response) : StatusCode(400, new {response.Errors, response.Success}) ;  
         }
     }
 }
