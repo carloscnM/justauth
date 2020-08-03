@@ -2,22 +2,22 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using justauth.src.Models;
+using justauth.src.Models.ServicesModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace justauth.src.Services.JWT 
 {
-    public class TokenService : ITokenService
+    public class TokenJwtService : ITokenJwtService
     {
         private IConfiguration _configuration;
         
-        public TokenService(IConfiguration configuration)
+        public TokenJwtService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         
-        public UserAuthentificad GenerateToken(string email)
+        public ServiceJwtResponse GenerateToken(string email)
         {
             var keySecretToToken = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
             double time =  Convert.ToDouble(_configuration["Jwt:Time"]);
@@ -39,7 +39,7 @@ namespace justauth.src.Services.JWT
 
             var token = TokenHandle.CreateToken(tokenDescriptor);
             
-            return new UserAuthentificad {
+            return new ServiceJwtResponse {
                 Email = email,
                 Token = TokenHandle.WriteToken(token),
                 Expiration = token.ValidTo

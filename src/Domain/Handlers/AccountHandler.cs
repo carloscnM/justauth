@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using justauth.src.Domain.Commands.Requests;
 using justauth.src.Domain.Commands.Responses;
-using justauth.src.Models;
+using justauth.src.Domain.Entities;
 using justauth.src.Services.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +15,14 @@ namespace justauth.src.Domain.Handlers
 
         #region propriety
         private readonly SignInManager<User> _signInManager;
-        private readonly ITokenService _tokenService;
+        private readonly ITokenJwtService _tokenService;
         private readonly UserManager<User> _userManager;
 
         #endregion
 
         #region constructs
         public LogonHandler(SignInManager<User> signInManager,
-            ITokenService tokenService,
+            ITokenJwtService tokenService,
             UserManager<User> userManager)
         {
             _userManager = userManager;

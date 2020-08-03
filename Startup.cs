@@ -1,6 +1,6 @@
 using System.Text;
+using justauth.src.Domain.Entities;
 using justauth.src.Infrastructure.DataBase;
-using justauth.src.Models;
 using justauth.src.Services.JWT;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace justauth
@@ -58,7 +57,7 @@ namespace justauth
                 };
             });
 
-            services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ITokenJwtService, TokenJwtService>();
 
             services.AddMediatR(typeof(Startup));
         }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace justauth.src.Models {
+namespace justauth.src.Domain.Entities {
     public class User : IdentityUser {
         public User(string firstName, string lastName, string email)
         {

@@ -1,4 +1,4 @@
-using justauth.src.Models;
+using justauth.src.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

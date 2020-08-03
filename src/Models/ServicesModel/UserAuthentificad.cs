@@ -1,8 +1,8 @@
 using System;
 
-namespace justauth.src.Models 
+namespace justauth.src.Models.ServicesModel 
 {
-    public class UserAuthentificad 
+    public class ServiceJwtResponse
     {
         public string  Email { get; set; }
         public string Token { get; set; }
