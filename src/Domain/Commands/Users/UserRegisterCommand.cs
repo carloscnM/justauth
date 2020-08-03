@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using justauth.src.Domain.Commands.Responses;
+using justauth.src.Models.Responses.Users;
 using MediatR;
 
-namespace justauth.src.Domain.Commands.Requests
+namespace justauth.src.Domain.Commands.Users
 {
-    public class RegisterUserRequest : IRequest<UserResponse>
+    public class UserRegisterCommand : IRequest<UserResponse>
     {
         public string FirstName { get; set; }
         

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using justauth.src.Domain.Commands.Requests;
+using justauth.src.Domain.Commands.Users;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ namespace justauth.src.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserRequest command)
+        public async Task<IActionResult> Register([FromBody] UserRegisterCommand command)
         {
            if(!ModelState.IsValid){
                return StatusCode(400, ModelState);
@@ -27,7 +27,7 @@ namespace justauth.src.Controllers
         }
 
         [HttpPost("logon")]
-        public async Task<IActionResult> Logon([FromBody] LogonRequest command)
+        public async Task<IActionResult> Logon([FromBody] UserLogonCommand command)
         {
             if(!ModelState.IsValid){
                 return StatusCode(400, ModelState);

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using justauth.src.Domain.Shared.Responses;
 
-namespace justauth.src.Domain.Commands.Responses
+namespace justauth.src.Models.Responses.Users
 {
     public class UserResponse : BaseResponse
     {
