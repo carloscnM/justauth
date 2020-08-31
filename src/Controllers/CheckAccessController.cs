@@ -8,7 +8,7 @@ namespace justauth.src.Controllers
     public class CheckAccessController : ControllerBase
     {
         [Authorize]
-        public IActionResult CheckAcessToken()
+        public IActionResult CheckAccessToken()
         {            
             return Ok(new { Status = "Authorized", Email = User.Identity.Name});
         }
